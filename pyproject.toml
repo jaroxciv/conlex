@@ -1,5 +1,5 @@
 [project]
-name = "contract-analysis"
+name = "conlex"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -15,4 +15,4 @@ dependencies = [
 ]
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = {conlex = "src/conlex"}

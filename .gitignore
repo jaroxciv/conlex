@@ -1,8 +1,36 @@
+# Python virtual environments
 .venv/
 .env
+
+# Byte-compiled / cache / distribution files
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Logs
+*.log
+
+# IDE/editor files (optional, but common)
+.vscode/
+.idea/
+
+# Test, coverage, profiling
+htmlcov/
+.coverage
+.cache
+.tox/
+.pytest_cache/
+*.cover
+
+# Data and outputs (keep folders, not contents)
 data/*
 !data/.gitkeep
 outputs/*
 !outputs/.gitkeep
+
+# OS-specific
+.DS_Store
+Thumbs.db

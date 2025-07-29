@@ -1,8 +1,8 @@
-from src.llm.engine import call_llm
-from src.llm.prompts import (
+from conlex.llm.engine import call_llm
+from conlex.llm.prompts import (
     ANALYSIS_PROMPT, CRITIC_PROMPT, JUDGE_PROMPT, IMPROVER_PROMPT
 )
-from src.utils.chunk import chunk_text
+from conlex.utils.chunk import chunk_text
 from loguru import logger
 
 def analyse_contract(text):

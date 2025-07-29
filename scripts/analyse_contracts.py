@@ -2,8 +2,8 @@
 
 import os
 import argparse
-from src.io.loader import load_contract
-from src.llm.reflexion import analyse_contract
+from conlex.io.loader import load_contract
+from conlex.llm.reflexion import analyse_contract
 from loguru import logger
 
 
@@ -31,9 +31,27 @@ def main():
         nargs="+",
         help="Contract .docx files (must exist in ./data/)"
     )
+    parser.add_argument(
+        "--synthesize", action="store_true",
+        help="After analyzing all contracts, synthesize a joint analysis (for two files only)."
+    )
     args = parser.parse_args()
+
+    analysed_files = []
     for filename in args.files:
         analyse_file(filename)
+        out_path = os.path.join(OUTPUTS_DIR, filename.replace(".docx", "_analysis.md"))
+        with open(out_path, "r", encoding="utf-8") as f:
+            analysed_files.append(f.read())
+
+    # If requested, run synthesis
+    if args.synthesize and len(analysed_files) == 2:
+        from conlex.llm.synthesizer import synthesize_analyses
+        synthesis = synthesize_analyses(analysed_files[0], analysed_files[1])
+        synth_path = os.path.join(OUTPUTS_DIR, "synthesis_analysis.md")
+        with open(synth_path, "w", encoding="utf-8") as f:
+            f.write(synthesis)
+        logger.success(f"Synthesized analysis saved to {synth_path}")
 
 if __name__ == "__main__":
     main()
